@@ -1,4 +1,10 @@
-<section data-ng-controller="HardCoursesController" data-ng-init="get()">
+<section data-ng-controller="HardCoursesController">
+	<form ng-submit="find()">
+		<fieldset>
+			<label>Enter Course Name</label>
+			<input ng-model="courseCd" name="course" type="text">
+		</fieldset>
+	</form>
 	
 	<h2>{{course.course._id}}</h2>
 	<span>{{course.course.avg_earned_credits}}</span>
@@ -6,9 +12,10 @@
 
 	<ul class="articles unstyled">
 		<li data-ng-repeat="class in course.results">
-			<span>{{class.coursecd}}</span>
+			<span>{{class.course}}</span> 
 			<span>{{class.average}}</span>
 			<div>{{class.timesTaken}}</div>
+			<canvas chart type="Bar" options="options" ng-attr-data='{{class.course}}' index="{{$index}}" width="300" height="300"></canvas>
 		</li>
 	</ul>
 	<h1 data-ng-hide="!course || course.results.length">Sorry no classes found</h1>
