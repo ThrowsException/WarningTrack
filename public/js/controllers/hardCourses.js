@@ -32,10 +32,10 @@ angular.module('mean.articles').controller('HardCoursesController', ['$scope', '
     				data.labels.push(result.credits);
     				data.datasets[0].data.push(result.times);
             	}
-            	//chart.push(data);
+            	chart.push(data);
             }
             
-            $scope[course.results[i].course] = data;
+            $scope.chart = chart;
         });
     };
 }]);

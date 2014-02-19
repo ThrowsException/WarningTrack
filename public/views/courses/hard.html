@@ -15,7 +15,7 @@
 			<span>{{class.course}}</span> 
 			<span>{{class.average}}</span>
 			<div>{{class.timesTaken}}</div>
-			<canvas chart type="Bar" options="options" ng-attr-data='{{class.course}}' index="{{$index}}" width="300" height="300"></canvas>
+			<canvas chart></canvas>
 		</li>
 	</ul>
 	<h1 data-ng-hide="!course || course.results.length">Sorry no classes found</h1>
