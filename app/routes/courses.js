@@ -2,13 +2,14 @@
 
 // Articles routes use articles controller
 var courses = require('../controllers/courses');
+var authorization = require('./middlewares/authorization');
 
 module.exports = function(app) {
 
-	app.get('/courses', courses.all);
-	app.get('/courses/:course', courses.course);
+	app.get('/courses', authorization.requiresLogin, courses.all);
+	app.get('/courses/:course',authorization.requiresLogin, courses.course);
 
-	app.get('/hardcourses/:course', courses.hardCourses);
+	app.get('/hardcourses/:course',authorization.requiresLogin, courses.hardCourses);
 	
-	app.get('/easycourses/:course', courses.easyCourses);
+	app.get('/easycourses/:course', authorization.requiresLogin, courses.easyCourses);
 };

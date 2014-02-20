@@ -19,6 +19,9 @@ angular.module('mean').config(['$routeProvider',
         when('/hardCourses/', {
             templateUrl: 'views/courses/hard.html'
         }).
+        when('/easyCourses/', {
+            templateUrl: 'views/courses/easy.html'
+        }).
         when('/hardCourses/:courseCd', {
             templateUrl: 'views/courses/hardCourses.html'
         }).

@@ -39,8 +39,11 @@ function aggregateHard(coursework, course, average, callback) {
 		{$unwind: '$courses'},
 		{$group: {_id: {course: '$_id', average: '$average', earnedCredits: '$courses.credits'}, timesTaken: {$sum: 1}}},
 		{$group: {_id: {course: '$_id.course', average: '$_id.average'}, timesTaken: {$sum: '$timesTaken'}, results: {$addToSet: {times: '$timesTaken', credits: '$_id.earnedCredits'}}}},
-		{$project: {course: '$_id.course', average: '$_id.average', timesTaken: '$timesTaken', results: '$results', _id: 0}},
-		{$match: { timesTaken: {$gt: 1}}},
+		{$unwind: '$results'},
+		{$sort: {'_id.course' : 1, 'results.credits': -1}},
+		{$group: {_id: { course: '$_id.course', average: '$_id.average', timesTaken: '$timesTaken'}, results: {$push: '$results'}}},
+		{$project: {course: '$_id.course', average: '$_id.average', timesTaken: '$_id.timesTaken', results: '$results', _id: 0}},
+		{$match: { timesTaken: {$gt: 10}}},
 		{$sort : {timesTaken : -1}}
 	], callback);
 }
@@ -73,8 +76,11 @@ function aggregateEasy(coursework, course, average, callback) {
 		{$unwind: '$courses'},
 		{$group: {_id: {course: '$_id', average: '$average', earnedCredits: '$courses.credits'}, timesTaken: {$sum: 1}}},
 		{$group: {_id: {course: '$_id.course', average: '$_id.average'}, timesTaken: {$sum: '$timesTaken'}, results: {$addToSet: {times: '$timesTaken', credits: '$_id.earnedCredits'}}}},
-		{$project: {course: '$_id.course', average: '$_id.average', timesTaken: '$timesTaken', results: '$results', _id: 0}},
-		{$match: { timesTaken: {$gt: 1}}},
+		{$unwind: '$results'},
+		{$sort: {'_id.course' : 1, 'results.credits': -1}},
+		{$group: {_id: { course: '$_id.course', average: '$_id.average', timesTaken: '$timesTaken'}, results: {$push: '$results'}}},
+		{$project: {course: '$_id.course', average: '$_id.average', timesTaken: '$_id.timesTaken', results: '$results', _id: 0}},
+		{$match: { timesTaken: {$gt: 10}}},
 		{$sort : {timesTaken : -1}}
 	], callback);
 }
