@@ -1,6 +1,7 @@
 'use strict';
 /* General Chart Wrapper */
-angular.module('mean').directive('cjChart', function () {
+angular.module('mean')
+.directive('cjChart', function () {
 	return {
 		restrict: 'A',
 		link: function (scope, elem) {

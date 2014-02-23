@@ -93,10 +93,29 @@ exports.all = function(req, res) {
 	});
 };
 
+exports.distinct = function(req, res) {
+	MongoClient.connect('mongodb://127.0.0.1:27017/winter_challenge', function(err, db) {
+		db.collection('c_student_coursework').distinct('COURSE_CD', function(err, docs){
+			res.jsonp(docs.sort());
+		});
+	});
+};
+
 exports.course = function(req, res) {
 	MongoClient.connect('mongodb://127.0.0.1:27017/winter_challenge', function(err, db) {
-		db.collection('c_student_coursework').find({'COURSE_CD' : req.params.course}).toArray(function(err, docs){
-			res.jsonp(docs);
+		db.collection('c_student_coursework').aggregate([
+			{$match: {'COURSE_CD' : req.params.course}},
+			{$group : {_id : '$COURSE_CD', courses: {$push: { course: '$COURSE_CD', credits: '$EARNED_CREDITS'}}}},
+			{$unwind: '$courses'},
+			{$group : {_id : {course: '$_id', credits: '$courses.credits' }, timesTaken : {$sum: 1}}},
+			{$project: {credits: '$_id.credits', timesTaken: 1, _id: 0}}
+
+		], function(err, docs) {
+			console.log(docs);
+			if(err) res.jsonp(err); 
+
+			var data = { course: req.params.course, courses: docs }
+			res.jsonp(data); 
 		});
 	});
 };
