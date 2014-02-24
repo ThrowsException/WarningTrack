@@ -6,23 +6,24 @@
 		</fieldset>
 	</form>
 	
-	<ul>
+	
+	<ul class='list-unstyled'>
 		<li data-ng-repeat="course in courses">
-			{{course}}
-			<canvas height="300px" width="1000px" cj-chart></canvas>
+			<div class="row" >
+				<div class="col-md-9">
+					<h2>{{course.course}}</h2>
+					<div class="row">
+					<div class="col-md-6">
+						<canvas height="200px" cj-chart></canvas>
+					</div>
+					<div class="col-md-6">
+						{{course.courses}}
+					</div>
+					</div>
+				</div>
+			</div>
 		</li>
-	<ul>
-	<h2>{{course.course._id}}</h2>
-	<span>{{course.course.avg_earned_credits}}</span>
-	<span>{{course.course.timesTaken}}</span>
+	</ul>
 
-	<!-- <ul class="articles unstyled">
-		<li data-ng-repeat="class in course.results">
-			<h4>{{class.course}}</h4> 
-			<span>{{class.average}}</span>
-			<div>{{class.timesTaken}}</div>
-			<canvas height="300px" width="1000px" cj-chart></canvas>
-		</li>
-	</ul> -->
 	<h1 data-ng-hide="!course || course.results.length">Sorry no classes found</h1>
 </section>
