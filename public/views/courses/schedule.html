@@ -13,12 +13,25 @@
 				<div class="col-md-9">
 					<h2>{{course.course}}</h2>
 					<div class="row">
-					<div class="col-md-6">
-						<canvas height="200px" cj-chart></canvas>
-					</div>
-					<div class="col-md-6">
-						{{course.courses}}
-					</div>
+						<div class="col-md-6">
+							<canvas height="200px" cj-chart></canvas>
+						</div>
+						<div class="col-md-6">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Times Taken</th>
+										<th>Credits Earned</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr data-ng-repeat="class in course.courses">
+										<td>{{class.timesTaken}}</td>
+										<td>{{class.credits}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -9,6 +9,9 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'Global'
     }, {
         'title': 'Easy Courses',
         'link': 'easyCourses'
+    }, {
+        'title': 'Course Selector',
+        'link': 'courseSelector'
     }];
     
     $scope.isCollapsed = false;

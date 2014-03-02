@@ -111,9 +111,9 @@ exports.course = function(req, res) {
 			{$project: {credits: '$_id.credits', timesTaken: 1, _id: 0}},
 			{$sort: {'credits': 1}}
 		], function(err, docs) {
-			if(err) res.jsonp(err); 
-			var data = { course: req.params.course, courses: docs }
-			res.jsonp(data); 
+			if(err) res.jsonp(err);
+			var data = { course: req.params.course, courses: docs };
+			res.jsonp(data);
 		});
 	});
 };

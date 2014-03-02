@@ -8,7 +8,6 @@ angular.module('mean')
 			var ctx = elem[0].getContext('2d');
 
 			var chart = new Chart(ctx).Bar(scope.chart[scope.$index]);
-
 		}
 	};
 });
