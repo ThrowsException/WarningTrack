@@ -45,4 +45,9 @@ angular.module('mean.articles').controller('CoursesController', ['$scope', '$rou
 			// or server returns response with an error status.
 		});
 	};
+
+	$scope.removeCourse = function (index) {
+		$scope.courses.splice(index,1);
+		$scope.chart.splice(index,1);
+	}
 }]);
